@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.rf.hp.normaluniversitystu.activity.mine.AboutUsActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_about_us"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/allback"
+        android:minHeight="?attr/actionBarSize">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="@string/str_mine_about_us"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+    </android.support.v7.widget.Toolbar>
+    <TextView
+        android:id="@+id/tv_about_content"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <com.rf.hp.normaluniversitystu.view.LoadingView
+        android:id="@+id/about_loading"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <WebView
+        android:id="@+id/wb_about_us"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></WebView>
+</LinearLayout>

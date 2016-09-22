@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.rf.hp.normaluniversitystu.activity.learn.SearchShareActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toobar_add_request"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/allback"
+        android:minHeight="?attr/actionBarSize">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="@string/str_learn_search"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+    </android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:background="@color/color_ll_bg"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <EditText
+            android:id="@+id/et_search_data"
+            android:layout_weight="6"
+            android:padding="5dp"
+            android:background="@drawable/shape_et_search"
+            android:layout_margin="5dp"
+            android:hint="@string/str_learn_input_key"
+            android:drawableLeft="@mipmap/search"
+            android:layout_width="0dp"
+            android:layout_height="40dp" />
+        <Button
+            android:id="@+id/btn_start_search"
+            android:text="@string/str_learn_btn_search"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@color/color_ll_bg"
+            android:textColor="@color/allback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <ListView
+        android:id="@+id/lv_search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+    <TextView
+        android:id="@+id/tv_search_nodata"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="未搜索到任何内容"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

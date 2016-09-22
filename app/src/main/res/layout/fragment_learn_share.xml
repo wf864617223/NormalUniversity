@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/fl_learn_share"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_getsharefiled"
+            android:gravity="center"
+            android:text="@string/str_learn_getsharefiled"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ListView
+            android:id="@+id/lv_learn_share"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
+
+        <ImageView
+            android:id="@+id/lv_srarch"
+            android:src="@mipmap/search_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="right|bottom" />
+    </FrameLayout>
+
+</LinearLayout>

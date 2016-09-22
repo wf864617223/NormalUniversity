@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="@drawable/shape_kaoqin_qiandao"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="25dp">
+        <ImageView
+            android:src="@drawable/dialog_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"/>
+        <TextView
+            android:id="@+id/tv_dialog_qianstatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="签到结果:未迟到"
+            android:textSize="15sp" />
+        <TextView
+            android:id="@+id/tv_dialog_qiantime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16sp"
+            android:text="签到时间:yyyy-MM-dd HH:mm:ss"
+            android:textSize="15sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_kaoqin_qiandao"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_alert_ok"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/allback"
+            android:text="关闭"
+            android:textColor="@color/white"
+            android:textSize="@dimen/s18p" />
+    </LinearLayout>
+
+</LinearLayout>

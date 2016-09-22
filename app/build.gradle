@@ -1,0 +1,33 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        applicationId "com.rf.hp.normaluniversitystu"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'org.xutils:xutils:3.3.34'
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.jakewharton:butterknife:7.0.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile files('libs/AMap_2DMap_V2.9.0_20160525.jar')
+    compile files('libs/AMap_Location_V2.4.1_20160414.jar')
+    compile files('libs/pushservice-5.1.0.48.jar')
+}

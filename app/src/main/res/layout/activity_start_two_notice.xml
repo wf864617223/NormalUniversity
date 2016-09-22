@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.rf.hp.normaluniversitystu.activity.noice.StartNoticeActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_noice_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/allback"
+        android:minHeight="?attr/actionBarSize">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="@string/str_noice_start"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+    </android.support.v7.widget.Toolbar>
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+        <CheckBox
+            android:id="@+id/cb_ischecked"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/dimen_reg_brn"
+            android:button="@drawable/cb_ischecked"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_noice_title"
+            android:text="标题"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/cb_ischecked"
+            android:layout_toEndOf="@+id/cb_ischecked" />
+        <TextView
+            android:id="@+id/tv_noice_time"
+            android:text="通知时间"
+            android:visibility="gone"
+            android:textColor="@color/color_red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_noice_title"
+            android:layout_alignLeft="@+id/tv_noice_title"
+            android:layout_alignStart="@+id/tv_noice_title" />
+    </RelativeLayout>
+</LinearLayout>

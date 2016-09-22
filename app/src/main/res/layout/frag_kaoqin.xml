@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_login"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/allback"
+        android:minHeight="?attr/actionBarSize">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:text="@string/str_kaoqin_kaoqin"
+            android:textSize="18sp"/>
+    </android.support.v7.widget.Toolbar>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_head"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"></android.support.v4.view.ViewPager>
+        <RadioGroup
+            android:id="@+id/rg_img_group"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom">
+            <RadioButton
+                android:id="@+id/rb_img1"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/rb_img2"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/rb_img3"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <!--<RadioButton
+                android:id="@+id/rb_img4"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />-->
+        </RadioGroup>
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/allback"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <ImageButton
+            android:id="@+id/btn_datajian"
+            android:background="@color/allback"
+            android:layout_weight="1"
+            android:src="@mipmap/arrow_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_data"
+            android:text="今天"
+            android:drawableLeft="@mipmap/date"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageButton
+            android:id="@+id/btn_data_add"
+            android:background="@color/allback"
+            android:layout_weight="1"
+            android:src="@mipmap/arrow_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_user_info"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="40dp">
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:text="张小小"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_user_class_info"
+            android:layout_weight="1"
+            android:text="2018届5班"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_dept_info"
+            android:layout_weight="1"
+            android:text="计算机科学与技术"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <!--<Button
+        android:id="@+id/btn_tomap"
+        android:text="签到"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_tomap_two"
+        android:text="签退"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_qingjia"
+        android:text="请假"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />-->
+    <TextView
+        android:id="@+id/tv_kaoqin_noclass"
+        android:text="今天没有课"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <com.rf.hp.normaluniversitystu.view.LoadingView
+        android:id="@+id/project_loading"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <ListView
+        android:id="@+id/lv_project"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
+</LinearLayout>

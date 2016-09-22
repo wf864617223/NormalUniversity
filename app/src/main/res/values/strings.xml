@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">五芯教育管家</string>
+    <!--登录页面-->
+    <string name="str_login_login">登录</string>
+    <string name="str_login_username">账号</string>
+    <string name="str_login_pwd">密码</string>
+    <string name="str_login_forgetpwd">忘记密码</string>
+    <string name="str_login_software_info">五芯教育科技和绵阳师范学院共同开发</string>
+    <string name="str_login_input_Id">请输入账号</string>
+    <string name="str_login_input_pwd">请输入密码</string>
+    <!--考勤-->
+    <string name="str_kaoqin_kaoqin">考勤</string>
+    <string name="str_kaoqin_qiandao">签到</string>
+    <string name="str_kaoqin_input_code">输入签到码</string>
+    <string name="str_kaoqin_qiantui">签退</string>
+    <string name="str_kaoqin_inputexit_code">输入签退码</string>
+    <string name="str_kaoqin_adinfo">广告详情</string>
+    <!--学习-->
+    <string name="str_learn_learn">学习</string>
+    <string name="str_learn_search">资料搜索</string>
+    <string name="str_learn_online">在线学习</string>
+    <string name="str_learn_input_key">请输入关键字</string>
+    <string name="str_learn_btn_search">搜索</string>
+    <string name="str_learn_nofileopen">无法打开文件</string>
+    <string name="str_learn_nosofrwareopen">您设备中没有对应软件可以打开此文件</string>
+    <string name="str_learn_getsharefiled">获取共享资料失败</string>
+    <!--通知-->
+    <string name="str_noice_noice">通知</string>
+    <string name="str_noice_info">通知详情</string>
+    <string name="str_noice_start">闹钟提醒</string>
+    <!--我的-->
+    <string name="str_mine_mine">我的</string>
+    <string name="str_mine_requestleave">请假申请</string>
+    <string name="str_mine_myadvice">意见反馈</string>
+    <string name="str_mine_changepwd">修改密码</string>
+    <string name="str_mine_aboutus">关于我们</string>
+    <string name="str_mine_exit_login">退出登录</string>
+    <string name="str_mine_mineinformation">个人信息</string>
+    <string name="str_mine_info_name">姓名</string>
+    <string name="str_mine_info_no">学号</string>
+    <string name="str_mine_info_phone">手机</string>
+    <string name="str_mine_info_dept">专业</string>
+    <string name="str_mine_info_class">班级</string>
+    <string name="str_mine_changePwd">修改密码</string>
+    <string name="str_mine_changePwd_old_pwd">旧密码</string>
+    <string name="str_mine_changePwd_new_pwd">新密码</string>
+    <string name="str_mine_changePwd_ok_pwd">确认密码</string>
+    <string name="str_mine_ok_change_pwd">确认修改</string>
+    <string name="str_mine_add_request">新增申请</string>
+    <string name="str_mine_add_thing">事假</string>
+    <string name="str_mine_add_health">病假</string>
+    <string name="str_mine_add_startTime">开始时间</string>
+    <string name="str_mine_add_endTime">结束时间</string>
+    <string name="str_mine_add_commit">提交</string>
+    <string name="str_mine_about_us">关于我们</string>
+
+    <!--忘记密码界面-->
+    <string name="str_forgot_pwd">请联系班级辅导员重置密码</string>
+</resources>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.rf.hp.normaluniversitystu.activity.mine.LolAddRequestActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toobar_lol_add_request"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/allback"
+        android:minHeight="?attr/actionBarSize">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="@string/str_mine_add_request"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+    </android.support.v7.widget.Toolbar>
+    <RadioGroup
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <RadioButton
+            android:id="@+id/rb_thing_leave"
+            android:text="@string/str_mine_add_thing"
+            android:textColor="#4E4B4B"
+            android:gravity="center"
+            android:button="@drawable/pay_mothed"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/rb_sick_leave"
+            android:text="@string/str_mine_add_health"
+            android:textColor="#4E4B4B"
+            android:gravity="center"
+            android:button="@drawable/pay_mothed"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
+    <LinearLayout
+        android:id="@+id/ll_startTime"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="@string/str_mine_add_startTime"
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/tv_startTime_date"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:hint="设置日期"
+            android:focusable="false"
+            android:inputType="none"
+            android:textSize="14sp"
+            android:background="@color/trans"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"  />
+        <EditText
+            android:id="@+id/tv_startTime_Time"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:hint="设置时间"
+            android:focusable="false"
+            android:inputType="none"
+            android:textSize="14sp"
+            android:background="@color/trans"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"  />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#dddddd" />
+    <LinearLayout
+        android:id="@+id/ll_endTime"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="@string/str_mine_add_endTime"
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/tv_endTime_date"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:hint="设置日期"
+            android:focusable="false"
+            android:inputType="none"
+            android:textSize="14sp"
+            android:background="@color/trans"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"  />
+        <EditText
+            android:id="@+id/tv_endTime_Time"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:hint="设置时间"
+            android:focusable="false"
+            android:inputType="none"
+            android:textSize="14sp"
+            android:background="@color/trans"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"  />
+    </LinearLayout>
+    <EditText
+        android:id="@+id/et_myAdvice"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_edittext_selector"
+        android:gravity="top"
+        android:hint="请假事由..."
+        android:padding="5dp"
+        android:textColorHint="@color/color_hint" />
+    <TextView
+        android:id="@+id/tv_warning"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:gravity="center"
+        android:textColor="@color/color_red"
+        android:text="开课前1小时停止请假"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_requestLeave"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/shape_btn_exitlogin"
+        android:text="@string/str_mine_add_commit"
+        android:textColor="#ffffff"  />
+</LinearLayout>
