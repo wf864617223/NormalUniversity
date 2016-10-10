@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
 import com.rf.hp.normaluniversitystu.R;
 import com.rf.hp.normaluniversitystu.bean.LoginBean;
 import com.rf.hp.normaluniversitystu.utils.GsonTools;
@@ -49,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         context = LoginActivity.this;
         getSupportActionBar().hide();
+
         initData();
     }
 

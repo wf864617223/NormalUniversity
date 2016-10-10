@@ -56,12 +56,16 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="ab0f1eafed155c426915f788faf01d4f" />
-
+        <meta-data
+            android:name="api_key"
+            android:value="ws1mNhewLGwi5NNHyHuGW3TS"/>
         <activity
             android:name=".activity.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+
+        </activity>
         <activity
             android:name=".activity.LoginActivity"
             android:screenOrientation="portrait" />
@@ -186,7 +190,9 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
-        <service android:name="com.baidu.android.pushservice.PushService" android:exported="true"
+        <service android:name="com.baidu.android.pushservice.PushService"
+            android:enabled="true"
+            android:exported="true"
             android:process=":bdservice_v1" >
             <intent-filter >
                 <action android:name="com.baidu.android.pushservice.action.PUSH_SERVICE" />
@@ -194,6 +200,7 @@
         </service>
         <!-- 4.4版本新增的CommandService声明，提升小米和魅族手机上的实际推送到达率 -->
         <service android:name="com.baidu.android.pushservice.CommandService"
+            android:enabled="true"
             android:exported="true" />
         <!-- push结束 -->
         <receiver android:name=".receiver.PushTestReceiver">
@@ -206,11 +213,13 @@
                 <action android:name="com.baidu.android.pushservice.action.notification.CLICK" />
             </intent-filter>
         </receiver>
+        <!-- 适配Android N系统必需的ContentProvider声明，写权限包含应用包名-->
         <provider
             android:name="com.baidu.android.pushservice.PushInfoProvider"
-            android:authorities="com.fu.baidupushproject.bdpush"
-            android:exported="true"
-            android:writePermission="baidu.push.permission.WRITE_PUSHINFOPROVIDER.com.rf.hp.normaluniversitystu" />
+            android:authorities="com.rf.hp.normaluniversitystu.bdpush"
+            android:writePermission="baidu.push.permission.WRITE_PUSHINFOPROVIDER.com.rf.hp.normaluniversitystu"
+            android:protectionLevel = "signature"
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -9,8 +9,8 @@ public class HttpContent {
     /**
      * 服务器地址
      */
-    //public static final String SERVER_ADDRESS = "http://do.rimiedu.com/wxjy";
-    public static final String SERVER_ADDRESS = "http://192.168.10.3";
+    public static final String SERVER_ADDRESS = "http://do.rimiedu.com/wxjy";
+    //public static final String SERVER_ADDRESS = "http://192.168.10.3";
     /**
      * 学生账号：密码:
      * 登录接口 post

@@ -177,6 +177,7 @@ public class MineInfoActivity extends AppCompatActivity {
         intent.putExtra("outputY", 150);
         intent.putExtra("return-data", true);
         startActivityForResult(intent, 3);
+
     }
 
     @Override

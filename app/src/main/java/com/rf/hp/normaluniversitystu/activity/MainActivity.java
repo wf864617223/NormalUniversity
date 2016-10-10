@@ -11,7 +11,8 @@ import android.view.KeyEvent;
 import android.view.View;
 
 
-
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
 import com.rf.hp.normaluniversitystu.R;
 import com.rf.hp.normaluniversitystu.bean.LoginBean;
 import com.rf.hp.normaluniversitystu.fragment.KaoqinFragment;
@@ -83,6 +84,12 @@ public class MainActivity extends AppCompatActivity implements KaoqinFragment.On
     }
 
     private void putToken() {
+        //PushManager.isConnected(context);
+        PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY,"ws1mNhewLGwi5NNHyHuGW3TS");
+        boolean pushEnabled = PushManager.isPushEnabled(context);
+        if(!pushEnabled){
+            PushManager.resumeWork(context);
+        }
         LoginBean.ResultBean resultBean = SharePreferInfoUtils.readUserInfo(context);
         String studentId = resultBean.getStudentId();
         String token = resultBean.getToken();
