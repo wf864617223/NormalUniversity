@@ -27,7 +27,10 @@ import com.amap.api.maps2d.CameraUpdateFactory;
 import com.amap.api.maps2d.LocationSource;
 import com.amap.api.maps2d.MapView;
 import com.amap.api.maps2d.model.BitmapDescriptorFactory;
+import com.amap.api.maps2d.model.GroundOverlay;
+import com.amap.api.maps2d.model.GroundOverlayOptions;
 import com.amap.api.maps2d.model.LatLng;
+import com.amap.api.maps2d.model.LatLngBounds;
 import com.amap.api.maps2d.model.MarkerOptions;
 import com.amap.api.maps2d.model.MyLocationStyle;
 import com.rf.hp.normaluniversitystu.R;
@@ -39,6 +42,7 @@ import com.rf.hp.normaluniversitystu.utils.HttpContent;
 import com.rf.hp.normaluniversitystu.utils.HttpUtil;
 import com.rf.hp.normaluniversitystu.utils.SharePreferInfoUtils;
 import com.rf.hp.normaluniversitystu.utils.T;
+import com.rf.hp.normaluniversitystu.utils.Utils;
 import com.rf.hp.normaluniversitystu.view.PrgDialog;
 
 import org.json.JSONException;
@@ -91,6 +95,8 @@ public class QiantuiActivity extends AppCompatActivity implements LocationSource
     private float signofflatitude;
     private String signOfflatitude;
     private String signOfflongitude;
+    private String TAG = "QIANTUIACTIVITY";
+    private boolean countRange = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +113,19 @@ public class QiantuiActivity extends AppCompatActivity implements LocationSource
 
     }
 
+    private void setFalseMap(){
+        MyLocationStyle myLocationStyle = new MyLocationStyle();
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(signofflatitude,signofflognitude),17));
+        //设置图片的显示区域
+        LatLngBounds bounds = new LatLngBounds.Builder()
+                .include(new LatLng(signofflatitude, signofflognitude))
+                .include(new LatLng(signofflatitude, signofflognitude)).build();
+        GroundOverlay groundoverlay = aMap.addGroundOverlay(new GroundOverlayOptions()
+                .anchor(0.5f, 0.5f).transparency(0.1f)
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.location_marker))
+                .positionFromBounds(bounds));
+        LatLng position = groundoverlay.getPosition();
+    }
     private void initData() {
         Bundle bundle = getIntent().getExtras();
         curriculumId = bundle.getString("curriculumId");
@@ -132,6 +151,12 @@ public class QiantuiActivity extends AppCompatActivity implements LocationSource
                     if(!"".equals(signOfflatitude)||!"".equals(signOfflongitude)){
                         signofflognitude = Float.parseFloat(signOfflongitude);
                         signofflatitude = Float.parseFloat(signOfflatitude);
+                    }
+                    if(!TextUtils.isEmpty(latitude+"")&&!TextUtils.isEmpty(longitude+"")){
+                        countRange = countRange();
+                        if(countRange){
+                            setFalseMap();
+                        }
                     }
                 }else{
                     String message = qiandaotuiAddBean.getMessage();
@@ -229,8 +254,14 @@ public class QiantuiActivity extends AppCompatActivity implements LocationSource
                 params.put("curriculumId",curriculumId);
                 params.put("rollcallTime",nowTime);
                 params.put("rollcallSignCode",inputCode);
-                params.put("rollcallLongitude",longitude+"");
-                params.put("rollcallLatitude",latitude+"");
+                if(countRange){
+                    params.put("rollcallLongitude",signOfflongitude+"");
+                    params.put("rollcallLatitude",signOfflatitude+"");
+                }else{
+                    params.put("rollcallLongitude",longitude+"");
+                    params.put("rollcallLatitude",latitude+"");
+                }
+
                 params.put("rollcallType",rollcallType);
                 params.put("token",token);
                 prgDialog = new PrgDialog(context);
@@ -252,11 +283,11 @@ public class QiantuiActivity extends AppCompatActivity implements LocationSource
                                 myDialog.getWindow().setContentView(R.layout.alertdialog_kaoqin_qiandao);
                                 myDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                                 TextView tvStatus = (TextView) myDialog.getWindow().findViewById(R.id.tv_dialog_qianstatus);
-                                tvStatus.setText("签到结果:"+rollcallStudentType);
+                                tvStatus.setText("签退结果:"+rollcallStudentType);
                                 TextView tvQianTime = (TextView) myDialog.getWindow().findViewById(R.id.tv_dialog_qiantime);
                                 /*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                 Date curDate = new Date(System.currentTimeMillis());//获取当前时间*/
-                                tvQianTime.setText("签到时间:" + rollcallStudentTime);
+                                tvQianTime.setText("签退时间:" + rollcallStudentTime);
                                 myDialog.getWindow().findViewById(R.id.btn_alert_ok).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
@@ -291,6 +322,24 @@ public class QiantuiActivity extends AppCompatActivity implements LocationSource
         });
     }
 
+    /**
+     * 判断定位的经纬度和从服务器上取到的经纬度的距离
+     *
+     */
+    private boolean countRange(){
+        double range = 0;
+        if(!signOfflatitude.equals("")&&!signOfflongitude.equals("")&&!TextUtils.isEmpty(latitude+"")&&!TextUtils.isEmpty(longitude+"")){
+            range = Utils.GetDistance(signofflognitude, signofflatitude, longitude, latitude);
+        }
+        Log.i(TAG,"距离为 range="+range);
+        int lenght = SharePreferInfoUtils.readLenght(context);
+        if(range>lenght*5){
+            //返回true表示要使用服务器的地址
+            return true;
+        }
+        //返回false表示要使用定位的地址
+        return false;
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -333,6 +382,13 @@ public class QiantuiActivity extends AppCompatActivity implements LocationSource
                 System.out.println("定位来源" + locationType + "纬度" + latitude + "经度" + longitude + "精度信息" + accuracy);
                 address = aMapLocation.getAddress();
                 System.out.println("地址" + address);
+                mlocationClient.stopLocation();
+                if(!TextUtils.isEmpty(signOfflatitude)&&!TextUtils.isEmpty(signOfflongitude)){
+                    countRange = countRange();
+                    if(countRange){
+                        setFalseMap();
+                    }
+                }
             } else {
                 String errText = "定位失败," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
                 //Toast.makeText(QiantuiActivity.this, errText, Toast.LENGTH_SHORT).show();

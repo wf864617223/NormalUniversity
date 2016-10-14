@@ -26,6 +26,9 @@ import com.rf.hp.normaluniversitystu.utils.SharePreferInfoUtils;
 import com.rf.hp.normaluniversitystu.utils.T;
 import com.rf.hp.normaluniversitystu.view.ViewIndicator;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.HashMap;
 
@@ -64,6 +67,28 @@ public class MainActivity extends AppCompatActivity implements KaoqinFragment.On
         mkAppDirs();
     }
 
+    private void getLenght(){
+        HttpUtil.doHttp(HttpContent.GET_LENGTH, null, new HttpUtil.IHttpResult() {
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    int status = jsonObject.optInt("status");
+                    if(status == 0){
+                        int lenght = jsonObject.optInt("result");
+                        SharePreferInfoUtils.saveLenght(context,lenght);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+        });
+    }
     private void mkAppDirs() {
         String sdStatus = Environment.getExternalStorageState();
         if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用

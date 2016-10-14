@@ -27,7 +27,10 @@ import com.amap.api.maps2d.CameraUpdateFactory;
 import com.amap.api.maps2d.LocationSource;
 import com.amap.api.maps2d.MapView;
 import com.amap.api.maps2d.model.BitmapDescriptorFactory;
+import com.amap.api.maps2d.model.GroundOverlay;
+import com.amap.api.maps2d.model.GroundOverlayOptions;
 import com.amap.api.maps2d.model.LatLng;
+import com.amap.api.maps2d.model.LatLngBounds;
 import com.amap.api.maps2d.model.MarkerOptions;
 import com.amap.api.maps2d.model.MyLocationStyle;
 import com.rf.hp.normaluniversitystu.R;
@@ -39,6 +42,7 @@ import com.rf.hp.normaluniversitystu.utils.HttpContent;
 import com.rf.hp.normaluniversitystu.utils.HttpUtil;
 import com.rf.hp.normaluniversitystu.utils.SharePreferInfoUtils;
 import com.rf.hp.normaluniversitystu.utils.T;
+import com.rf.hp.normaluniversitystu.utils.Utils;
 import com.rf.hp.normaluniversitystu.view.PrgDialog;
 
 import org.json.JSONArray;
@@ -93,6 +97,8 @@ public class QiandaoActivity extends AppCompatActivity implements LocationSource
     private float signinlatitude;
     private String signOfflatitude;
     private String signOfflongitude;
+    private String TAG = "QIANDAOACTIVITY";
+    private boolean countRange = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +139,14 @@ public class QiandaoActivity extends AppCompatActivity implements LocationSource
                         signinlognitude = Float.parseFloat(signOfflongitude);
                         signinlatitude = Float.parseFloat(signOfflatitude);
                     }
+                    if(!TextUtils.isEmpty(latitude+"")&&!TextUtils.isEmpty(longitude+"")){
+                        countRange = countRange();
+                        if(countRange){
+                            //要使用服务器地址
+                            setFalseMap();
+                        }
+                    }
+
                 }else{
                     String message = qiandaotuiAddBean.getMessage();
                     if("Invalid Token".equals(message)){
@@ -155,6 +169,25 @@ public class QiandaoActivity extends AppCompatActivity implements LocationSource
         tvProjectTime.setText("时间："+startEndTime);
     }
 
+    /**
+     * 判断定位的经纬度和从服务器上取到的经纬度的距离
+     *
+     */
+    private boolean countRange(){
+        double range = 0;
+        if(!signOfflatitude.equals("")&&!signOfflongitude.equals("")&&!TextUtils.isEmpty(latitude+"")&&!TextUtils.isEmpty(longitude+"")){
+            range = Utils.GetDistance(signinlognitude, signinlatitude, longitude, latitude);
+        }
+        Log.i(TAG,"距离为 range="+range);
+        T.ShowToast(context,"距离为 range="+range);
+        int lenght = SharePreferInfoUtils.readLenght(context);
+        if(range>lenght*5){
+            //返回true表示要使用服务器的地址
+            return true;
+        }
+        //返回false表示要使用定位的地址
+        return false;
+    }
     private void init() {
         if (aMap == null) {
             aMap = mMapView.getMap();
@@ -162,6 +195,20 @@ public class QiandaoActivity extends AppCompatActivity implements LocationSource
         }
     }
 
+    private void setFalseMap(){
+        MyLocationStyle myLocationStyle = new MyLocationStyle();
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(signinlatitude,signinlognitude),17));
+        //设置图片的显示区域
+        LatLngBounds bounds = new LatLngBounds.Builder()
+                .include(new LatLng(signinlatitude, signinlognitude))
+                .include(new LatLng(signinlatitude, signinlognitude)).build();
+        GroundOverlay groundoverlay = aMap.addGroundOverlay(new GroundOverlayOptions()
+                .anchor(0.5f, 0.5f).transparency(0.1f)
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.location_marker))
+                .positionFromBounds(bounds));
+        LatLng position = groundoverlay.getPosition();
+
+    }
     private void setUpMap() {
         // 自定义系统定位小蓝点
         MyLocationStyle myLocationStyle = new MyLocationStyle();
@@ -174,12 +221,13 @@ public class QiandaoActivity extends AppCompatActivity implements LocationSource
         aMap.setMyLocationStyle(myLocationStyle);
         aMap.setLocationSource(this);// 设置定位监听
 
+
         // 设置地图可视缩放大小
         aMap.moveCamera(CameraUpdateFactory.zoomTo(17));
         //这里可以将接口的经纬度放进去
-        LatLng latLng = new LatLng(signinlognitude, signinlatitude);
+        //LatLng latLng = new LatLng(signinlognitude, signinlatitude);
         MarkerOptions otMarkerOptions = new MarkerOptions();
-        otMarkerOptions.position(latLng);
+        //otMarkerOptions.position(latLng);
         otMarkerOptions.visible(true);//设置可见
         otMarkerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.coord_blue));
         otMarkerOptions.draggable(true);
@@ -231,8 +279,13 @@ public class QiandaoActivity extends AppCompatActivity implements LocationSource
                 params.put("curriculumId",curriculumId);
                 params.put("rollcallTime",nowTime);
                 params.put("rollcallSignCode",inputCode);
-                params.put("rollcallLongitude",longitude+"");
-                params.put("rollcallLatitude",latitude+"");
+                if(countRange){
+                    params.put("rollcallLongitude",signOfflongitude+"");
+                    params.put("rollcallLatitude",signOfflatitude+"");
+                }else{
+                    params.put("rollcallLongitude",longitude+"");
+                    params.put("rollcallLatitude",latitude+"");
+                }
                 params.put("rollcallType",rollcallType);
                 params.put("token",token);
                 prgDialog = new PrgDialog(context);
@@ -311,6 +364,14 @@ public class QiandaoActivity extends AppCompatActivity implements LocationSource
                 System.out.println("定位来源" + locationType + "纬度" + latitude + "经度" + longitude + "精度信息" + accuracy);
                 address = aMapLocation.getAddress();
                 System.out.println("地址" + address);
+                mlocationClient.stopLocation();
+                if(!TextUtils.isEmpty(signOfflatitude)&&!TextUtils.isEmpty(signOfflongitude)){
+                    countRange = countRange();
+                    if(countRange){
+                        setFalseMap();
+                    }
+                }
+
             } else {
                 String errText = "定位失败," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
                 //String errText = "定位失败";
@@ -339,6 +400,7 @@ public class QiandaoActivity extends AppCompatActivity implements LocationSource
             // 在定位结束后，在合适的生命周期调用onDestroy()方法
             // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
             mlocationClient.startLocation();
+
         }
     }
 

@@ -304,4 +304,20 @@ public class SharePreferInfoUtils {
         editor.putString(key,"");
         editor.commit();
     }
+
+    /**
+     * 保存签到距离
+     * @param context
+     * @param lenght
+     */
+    public static void saveLenght(Context context,int lenght){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("lenght",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("lenght",lenght);
+        editor.commit();
+    }
+    public static int readLenght(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("lenght",Context.MODE_PRIVATE);
+        return sharedPreferences.getInt("lenght",0);
+    }
 }
