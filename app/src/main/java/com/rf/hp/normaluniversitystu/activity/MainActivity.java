@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements KaoqinFragment.On
         putToken();
         MarsQuestion.verifyStoragePermissions(MainActivity.this);
         mkAppDirs();
+        getLenght();
     }
 
     private void getLenght(){
