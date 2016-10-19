@@ -31,6 +31,8 @@
             android:id="@+id/et_search_data"
             android:layout_weight="6"
             android:padding="5dp"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
             android:background="@drawable/shape_et_search"
             android:layout_margin="5dp"
             android:hint="@string/str_learn_input_key"
@@ -40,6 +42,7 @@
         <Button
             android:id="@+id/btn_start_search"
             android:text="@string/str_learn_btn_search"
+            android:visibility="gone"
             android:layout_weight="1"
             android:gravity="center"
             android:background="@color/color_ll_bg"

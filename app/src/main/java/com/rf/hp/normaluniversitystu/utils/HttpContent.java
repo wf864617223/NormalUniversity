@@ -9,8 +9,8 @@ public class HttpContent {
     /**
      * 服务器地址
      */
-    //public static final String SERVER_ADDRESS = "http://do.rimiedu.com/wxjy";
-    public static final String SERVER_ADDRESS = "http://192.168.10.3";
+    public static final String SERVER_ADDRESS = "http://do.rimiedu.com/wxjy";
+    //public static final String SERVER_ADDRESS = "http://192.168.10.3";
     /**
      * 学生账号：密码:
      * 登录接口 post
@@ -89,5 +89,5 @@ public class HttpContent {
      */
     public static final String PUT_TOKEN = SERVER_ADDRESS+"/api/student/token.html";
     //public static final String PUT_TOKEN = "http://192.168.6.65:8080/api/student/token.html";
-    public static final String GET_LENGTH = "http://192.168.6.65:8080/api/distance/getDistance.html";
+    public static final String GET_LENGTH = SERVER_ADDRESS+"/api/distance/getDistance.html";
 }

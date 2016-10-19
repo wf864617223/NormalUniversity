@@ -14,7 +14,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -81,14 +83,65 @@ public class SearchShareActivity extends AppCompatActivity {
     }
 
     private void initData() {
+        etSearchData.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                String searchData = etSearchData.getText().toString();
+                if(actionId== EditorInfo.IME_ACTION_SEARCH
+                        ||(event!=null&&event.getKeyCode()== KeyEvent.KEYCODE_ENTER)){
+                    if (!TextUtils.isEmpty(searchData)) {
+                        etSearchData.setText("");
+                        prgDialog = new PrgDialog(context);
+                        String encode = "";
+                        try {
+                            encode = URLEncoder.encode(searchData, "UTF-8");
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                        HttpUtil.doHttp(HttpContent.GET_SHARE_DATA + encode, null, new HttpUtil.IHttpResult() {
+                            @Override
+                            public void onSuccess(String result) {
+                                ShareDataBean shareDataBean = GsonTools.getBean(result, ShareDataBean.class);
+                                int status = shareDataBean.getStatus();
+                                prgDialog.closeDialog();
+                                if (status == 0) {
+                                    result1 = shareDataBean.getResult();
+                                    adapter = new InfoShareAdapter(result1, context);
+                                    lvSearchView.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+                                    if (result1.size() == 0 || lvSearchView == null) {
+                                        tvSearchNodata.setVisibility(View.VISIBLE);
+                                    }
+                                } else {
+                                    String message = shareDataBean.getMessage();
+                                    T.ShowToast(context, message);
+                                }
+                            }
+
+                            @Override
+                            public void onError(Throwable ex, boolean isOnCallback) {
+                                prgDialog.closeDialog();
+                                T.ShowToast(context,"服务器连接失败");
+                            }
+                        });
+                    return true;
+                    }else{
+                        T.ShowToast(context, "未输入任何内容");
+                    }
+                }
+                return false;
+            }
+        });
         btnStartSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tvSearchNodata.setVisibility(View.GONE);
                 String searchData = etSearchData.getText().toString();
                 if (TextUtils.isEmpty(searchData)) {
                     T.ShowToast(context, "未输入任何内容");
                     return;
                 }
+                etSearchData.setText("");
                 prgDialog = new PrgDialog(context);
                 //URLEncoder.encode(searchContent, "UTF-8");
 

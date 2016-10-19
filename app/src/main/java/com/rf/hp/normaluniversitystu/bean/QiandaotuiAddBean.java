@@ -6,27 +6,19 @@ package com.rf.hp.normaluniversitystu.bean;
 public class QiandaotuiAddBean {
 
     /**
+     * message : Success
+     * result : {"signInlatitude":"30.574764","signInlongitude":"104.064674"}
      * status : 0
-     * message : success
-     * result : {"signOfflongitude":"\u201d\u201d","signOfflatitude":"\u201d\u201d"}
      */
 
-    private int status;
     private String message;
     /**
-     * signOfflongitude : ””
-     * signOfflatitude : ””
+     * signInlatitude : 30.574764
+     * signInlongitude : 104.064674
      */
 
     private ResultBean result;
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
+    private int status;
 
     public String getMessage() {
         return message;
@@ -44,24 +36,32 @@ public class QiandaotuiAddBean {
         this.result = result;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     public static class ResultBean {
-        private String signOfflongitude;
-        private String signOfflatitude;
+        private String signInlatitude;
+        private String signInlongitude;
 
-        public String getSignOfflongitude() {
-            return signOfflongitude;
+        public String getSignInlatitude() {
+            return signInlatitude;
         }
 
-        public void setSignOfflongitude(String signOfflongitude) {
-            this.signOfflongitude = signOfflongitude;
+        public void setSignInlatitude(String signInlatitude) {
+            this.signInlatitude = signInlatitude;
         }
 
-        public String getSignOfflatitude() {
-            return signOfflatitude;
+        public String getSignInlongitude() {
+            return signInlongitude;
         }
 
-        public void setSignOfflatitude(String signOfflatitude) {
-            this.signOfflatitude = signOfflatitude;
+        public void setSignInlongitude(String signInlongitude) {
+            this.signInlongitude = signInlongitude;
         }
     }
 }

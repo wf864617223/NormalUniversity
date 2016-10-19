@@ -147,6 +147,7 @@ public class ProjectAdapter extends BaseAdapter {
                     bundle.putString("classroom",classroom);
                     bundle.putString("teachName",teachName);
                     bundle.putString("startEndTime",startEndTime);
+                    bundle.putString("curriculumStartTime",curriculumStartTime);
                     intent.putExtras(bundle);
                     context.startActivity(intent);
                 }else {
@@ -185,6 +186,7 @@ public class ProjectAdapter extends BaseAdapter {
                         bundle.putString("classroom",classroom);
                         bundle.putString("teachName",teachName);
                         bundle.putString("startEndTime",startEndTime);
+                        bundle.putString("curriculumStartTime",curriculumStartTime);
                         intent.putExtras(bundle);
                         context.startActivity(intent);
                     }else{
